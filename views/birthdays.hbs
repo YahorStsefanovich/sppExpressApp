@@ -1,0 +1,11 @@
+{{#if peopleList}}
+  <ul class="peopleList">
+    {{#each peopleList}}
+      {{#with this}}
+        <li>{{_firstName}} {{_lastName}} - {{_birthday}}</li>
+      {{/with}}
+    {{/each}}
+  </ul>
+{{else}}
+  <h1>Unknown Author</h1>
+{{/if}}
