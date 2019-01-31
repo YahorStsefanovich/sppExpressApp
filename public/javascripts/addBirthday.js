@@ -18,7 +18,19 @@ const birthdaysLS = "birthdaysLS";
         }
 
         resultList.push(new Birthday(firstName, lastName, birthday));
-
+        let now = new Date(Date.now() + 24*3600);
+        now.setHours(0,0,0,0);
+        
+        resultList.sort((a, b)=>{
+            let dateA = new Date(a._birthday);
+            let dateB = new Date(b._birthday);
+            let year = now.getFullYear();
+            dateA.setFullYear(year);
+            dateB.setFullYear(year);
+            return (dateA.getTime() - now.getTime()) - (dateB.getTime() - now.getTime());
+        });
+        
+        
         localStorage.setItem(birthdaysLS, JSON.stringify(resultList));
         console.log("added successfully");
     });

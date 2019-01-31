@@ -6,7 +6,6 @@ const bodyParser = require("body-parser");
 // создаем парсер для данных application/x-www-form-urlencoded
 const urlencodedParser = bodyParser.urlencoded({extended: false});
 
-
 router.get('/', function(req, res, next) {
     res.render('form',
         {
