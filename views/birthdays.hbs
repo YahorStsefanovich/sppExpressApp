@@ -3,7 +3,7 @@
   <ul class="list-group">
     {{#each peopleList}}
       {{#with this}}
-        <li class="list-group-item">{{_firstName}} {{_lastName}} - {{_birthday}}</li>
+        <li class="list-group-item"><div>{{_firstName}} {{_lastName}} - </div>{{checkDate _birthday}}</li>
       {{/with}}
     {{/each}}
   </ul>

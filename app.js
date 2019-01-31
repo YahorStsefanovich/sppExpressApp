@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var favicon = require('serve-favicon');
 var hbs = require("hbs");
+var moment = require("moment");
 
 var indexRouter = require('./routes/index');
 var formRouter = require('./routes/form');
@@ -44,6 +45,25 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+hbs.registerHelper("checkDate", function(value){
+  var result="";
+  let now = new Date(Date.now());
+  now.setHours(0,0,0,0);
+  
+  let date = new Date(value);
+  date.setFullYear(now.getFullYear());
+  
+  let delta = date.getTime() - now.getTime();
+  var itemDate = moment(delta);
+  
+  if ((delta > -24*3600*1000) && (delta < 7*24*3600*1000)){
+    result = `<div class="red">${itemDate.format("dddd, MMMM DD")}</div>`;
+  } else
+    result = `<div>${itemDate.format("dddd, MMMM DD")}</div>`;
+  
+  return new hbs.SafeString(result);
 });
 
 module.exports = app;
