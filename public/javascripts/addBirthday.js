@@ -18,15 +18,21 @@ const birthdaysLS = "birthdaysLS";
         }
 
         resultList.push(new Birthday(firstName, lastName, birthday));
-        let now = new Date(Date.now() + 24*3600);
+        let now = new Date(Date.now() + 24*3600*1000);
         now.setHours(0,0,0,0);
-        
-        resultList.sort((a, b)=>{
+    
+        resultList = resultList.sort((a, b)=>{
             let dateA = new Date(a._birthday);
             let dateB = new Date(b._birthday);
             let year = now.getFullYear();
             dateA.setFullYear(year);
             dateB.setFullYear(year);
+            
+            if (dateA.getTime() < now.getTime())
+                dateA.setFullYear(dateA.getFullYear() + 1);
+            if (dateB.getTime() < now.getTime())
+                dateB.setFullYear(dateB.getFullYear() + 1);
+            
             return (dateA.getTime() - now.getTime()) - (dateB.getTime() - now.getTime());
         });
         
