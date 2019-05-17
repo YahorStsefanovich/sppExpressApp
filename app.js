@@ -56,12 +56,13 @@ hbs.registerHelper("checkDate", function(value){
   date.setFullYear(now.getFullYear());
   
   let delta = date.getTime() - now.getTime();
-  var itemDate = moment(delta);
+  date = new Date(value);
+  var itemDate = moment(date.getTime());
   
   if ((delta > -24*3600*1000) && (delta < 7*24*3600*1000)){
-    result = `<div class="red">${itemDate.format("dddd, MMMM DD")}</div>`;
+    result = `<div class="red">${itemDate.format("MMMM Do, YYYY")}</div>`;
   } else
-    result = `<div>${itemDate.format("dddd, MMMM DD")}</div>`;
+    result = `<div>${itemDate.format("MMMM Do, YYYY")}</div>`;
   
   return new hbs.SafeString(result);
 });
